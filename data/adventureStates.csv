@@ -1,0 +1,5 @@
+ID,StateName,ClassName,PNGFilename
+0,Splash,SplashScreen,assets/Splash.png
+1,Instructions,InstructionsScreen,assets/Instructions.png
+2,Characters,CharacterScreen,assets/Characters.png
+3,Data,DataScreen,assets/Data.png

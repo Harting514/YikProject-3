@@ -1,0 +1,4 @@
+ID,Name,State,PNGFilename,Text,x,y,width,height
+0,Next,,,Next,100,650,100,50
+1,StartGame,,,StartGame,100,650,100,50
+2,Yes! Promote!,,,Yes! Promote!,100,650,100,50

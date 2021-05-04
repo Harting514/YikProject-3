@@ -1,0 +1,13 @@
+State,Group,Index,Content
+Room1,0,0,The mind-reading machine comes out! Whether to promote it vigorously?
+Room1-End,0,0,"The Mind-Reading machine failed to be promoted, Palanda went bankrupt, insolvent, the economy fell, and the people began to riot"
+Room2,0,0,"The mind-reading machine has been promoted! Palanda company began to make profits and expand development, increasing employment. Government taxes increase, but at the same time risks also increase."
+Room2-End,0,0,"As the mind-reading machine failed to continue to receive support, Palanda moved its headquarters to another state, and taxes and jobs declined."
+Room3,0,0,"The thinking terminal is developing rapidly, and the government strongly supports the promotion of the machine. There a new voice of doubt in society that it is dangerous to promote the machine too vigorously and without reasonable supervision."
+Room3-1,0,0,"The government held a hearing and a national survey, and began to supervise the Palanda company"
+Rom3-1-End,0,0,"In response to the hearing results, the government formed a data security monitoring team to strengthen the supervision of Palanda, but this operation hindered the better development of the machine"
+Room4,0,0,"The government did not listen to the voice of doubt, and the Palanda company and the mind-reading machine continued to expand and develop. However, due to the phenomenon of financial overheating, a large number of bubbles have appeared in the economy. And the government also began to use the machine for administrative office"
+Room4-1,0,0,"As more and more questions were raised, the government held a hearing and a national survey, and began to supervise the Palanda company"
+Room4-1-End,0,0,"In response to the hearing results, the government wants to supervise and investigate the Palanda company, but because the mind-reading machine has too much influence and is used by a large number of government officials, it stores many administrative documents. Palanda used this as a threat to control the government department."
+Final-End,0,0,"The government still did not listen to the voices of doubt, which led to more and more people joining the resistance groups, and riots occurred."
+Option-End,0,0,"The notorious hacker group took a fancy to the high value of Palanda's large amounts of data and launched an attack on the terminal of the mind reader. For the government’s overly loose policies, Palanda did not strengthen data security measures. Data was leaked. A large number of personal information and government documents were stolen by hackers and caused resident riots."

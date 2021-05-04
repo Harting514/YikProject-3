@@ -1,0 +1,4 @@
+CurrentState,KeyTyped,KeyCode,MouseEvent,ClickableName,NextState
+Splash,,,,Next,Instructions
+Instructions,,,,Next,Characters
+Characters,,,,Next,Data
