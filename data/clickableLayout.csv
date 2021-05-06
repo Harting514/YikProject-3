@@ -2,3 +2,9 @@ ID,Name,State,PNGFilename,Text,x,y,width,height
 0,Next,,,Next,100,650,100,50
 1,StartGame,,,StartGame,100,650,100,50
 2,Yes! Promote!,,,Yes! Promote!,100,650,100,50
+3,Keep Promote!,,,Keep Promote!,100,650,100,50
+4,Nope,,,Nope,1050,650,100,50
+5,STOP Promote,,,STOP Promote,1050,650,100,50
+6,"Ignore Doubts, KEEP Promote!",,,"Ignore Doubts, KEEP Promote!",100,650,100,50
+7,Listen to Doubts and Suspend Promotion,,,Listen to Doubts and Suspend Promotion,1050,650,100,50
+8,Form a data secyruty supervision team,,,Form a data secyruty supervision team,630,650,100,50

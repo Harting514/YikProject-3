@@ -98,13 +98,17 @@ class AdventureManager {
             // this will reset the player position, if we go outside of a collision rect
             if( this.states[this.currentState].checkForCollision(this.playerSprite) === true ) {
                 // set to last good position
-                this.playerSprite.position.x = this.savedPlayerSpritePosition.x;
-                this.playerSprite.position.y = this.savedPlayerSpritePosition.y;
+                 if( this.playerSprite !== null ) {
+                    this.playerSprite.position.x = this.savedPlayerSpritePosition.x;
+                    this.playerSprite.position.y = this.savedPlayerSpritePosition.y;
+                }
             }
             else {
-                // save the last poisition for checkCollision in the future
-                this.savedPlayerSpritePosition.x = this.playerSprite.position.x;
-                this.savedPlayerSpritePosition.y = this.playerSprite.position.y;
+                if( this.playerSprite !== null ) {
+                    // save the last poisition for checkCollision in the future
+                    this.savedPlayerSpritePosition.x = this.playerSprite.position.x;
+                    this.savedPlayerSpritePosition.y = this.playerSprite.position.y;
+                }
             }
 
             background(this.backgroundColor);
@@ -290,6 +294,10 @@ class AdventureManager {
 
     // return direction we are out of bounds to match interaction map
     checkSpriteBounds() {
+        if( this.playerSprite == null ) {
+            return "";
+        }
+
         if( this.playerSprite.position.x < -1 ) {
             return "W";
         }
@@ -307,22 +315,30 @@ class AdventureManager {
     }
 
     adjustSpriteForRoom() {
+        if( this.playerSprite === null ) {
+            return;
+        }
+
         if( this.playerSprite.position.x < -1 ) {
-            playerSprite.position.x = width;
+            this.playerSprite.position.x = width;
         }
         else if( this.playerSprite.position.x > width ) {
-            playerSprite.position.x = 0;
+            this.playerSprite.position.x = 0;
         }
         else if( this.playerSprite.position.y < -1 ) {
-            playerSprite.position.y = height;
+            this.playerSprite.position.y = height;
         }
         else if( this.playerSprite.position.y > height ) {
-            playerSprite.position.y = 0;
+            this.playerSprite.position.y = 0;
         }
     }
 
     // no room, constrain to edges
     constrainSpriteBounds() {
+        if( this.playerSprite === null ) {
+            return;
+        }
+
         if(this.playerSprite.position.x < -1 ) {
             this.playerSprite.position.x = 0;
         }

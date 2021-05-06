@@ -2,3 +2,14 @@ CurrentState,KeyTyped,KeyCode,MouseEvent,ClickableName,NextState
 Splash,,,,Next,Instructions
 Instructions,,,,Next,Characters
 Characters,,,,Next,Data
+Data,,,,StartGame,Room1
+Room1,,,,Nope,Room1-End
+Room1,,,,Yes! Promote!,Room2
+Room2,,,,STOP Promote,Room2-End
+Room2,,,,Keep Promote!,Room3
+Room3,,,,Listen to Doubts and Suspend Promotion,Room3-1
+Room3-1,,,,Form a data secyruty supervision team,Room3-1-End
+Room3,,,,"Ignore Doubts, KEEP Promote!",Room4
+Room4,,,,Listen to Doubts and Suspend Promotion,Room4-1
+Room4-1,,,,Form a data secyruty supervision team,Room4-1-End
+Room4,,,,"Ignore Doubts, KEEP Promote!",Final-End

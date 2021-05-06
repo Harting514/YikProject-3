@@ -23,33 +23,14 @@ var dataHeight = 110;
 var CharacterWeight = 110;
 var CharacterHeight = 100;
 
-var talkedToWeirdNPC = false;
-
-var NPCW = 100;
-var NPCH = 100;
-
-var NPC = [];
-
-var gDebugMode = true;
-
-var index = 0;
 
 var ina = 0;
 var groupIndex = 0;
 
-var ImageIndex = 0;
+var gDebugMode = true;
 
-var file = [];
-var logo = [];
 
-//For Room4 content (2 NPC)
-var inaMen = 0;
-var inaWomen = 0;
-var groupIndexMen = 0;
-var groupIndexWomen = 0;
 
-//team array
-var teamList = [];
 
 // adventure manager global  
 var adventureManager;
@@ -63,7 +44,7 @@ var NPCSprite;
 // Allocate Adventure Manager with states table and interaction tables
 function preload() {
   clickablesManager = new ClickableManager('data/clickableLayout.csv');
-  //content = new Content_Man('data/Content.csv');
+  content = new Content_Man('data/Content.csv');
   adventureManager = new AdventureManager("data/adventureStates.csv", "data/interactionTable.csv");
 }
 
@@ -80,7 +61,7 @@ function setup() {
 
   adventureManager.setClickableManager(clickablesManager);
   setupClickables(); 
-  //content.setup();
+  content.setup();
 
   textSize(24);
   textAlign(LEFT);
@@ -149,17 +130,17 @@ clickableButtonPressed = function() {
 
 }
 
-//content function (also learn this from Jiaquan)
-// function drawtextbox(content) {
-//   push();
-//   fill(0);
-//   rect(0,height-200,width,200); //textbox
-//   fill(255);
-//   textAlign(CENTER);
-//   textSize(20);
-//   text(content,0,height-150, width, 200);
-//   pop();
-// }
+//content function ()
+function drawtextbox(content) {
+  push();
+  fill(0);
+  rect(0,height-200,width,200); //textbox
+  fill(255);
+  textAlign(CENTER);
+  textSize(20);
+  text(content,0,height-150, width, 200);
+  pop();
+}
 
 
 class SplashScreen extends PNGRoom{
@@ -214,454 +195,474 @@ class DataScreen extends PNGRoom{
 
   draw() {
     super.draw();
+    clickables[1].visible = true;
+    clickables[1].onPress = function temp(){
+      adventureManager.changeState("Room1");
+    }
+  }
+}
+
+class Room1Page extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+
+    clickables[2].visible = true;
+    clickables[4].visible = true;
+
+    clickables[2].onPress = function temp(){
+      adventureManager.changeState("Room2");
+    }
+    clickables[4].onPress = function temp(){
+      adventureManager.changeState("Room1-End");
+    }
+
+    content.ChangeToState('Room1');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+
+  }
+}
+
+
+class Room1EndPage extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    
+
+    content.ChangeToState('Room1-End');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+
+  }
+}
+
+
+
+class Room2Page extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+
+    clickables[3].visible = true;
+    clickables[5].visible = true;
+
+    clickables[3].onPress = function temp(){
+      adventureManager.changeState("Room3");
+    }
+    clickables[5].onPress = function temp(){
+      adventureManager.changeState("Room2-End");
+    }
+
+
+    content.ChangeToState('Room2');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+
+  }
+}
+
+
+
+class Room2EndPage extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    
+
+    content.ChangeToState('Room2-End');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+
+  }
+}
+
+
+
+class Room3Page extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/antilogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+    
+    clickables[6].visible = true;
+    clickables[7].visible = true;
+
+    clickables[6].onPress = function temp(){
+      adventureManager.changeState("Room4");
+    }
+    clickables[7].onPress = function temp(){
+      adventureManager.changeState("Room3-1");
+    }
+
+
+    content.ChangeToState('Room3');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+
+  }
+}
+
+
+class Room3_1Page extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/antilogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+    
+    clickables[8].visible = true;
+
+
+    clickables[8].onPress = function temp(){
+      adventureManager.changeState("Room3-1-End");
+    }
+
+
+    content.ChangeToState('Room3-1');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+
+  }
+}
+
+
+
+class Room3_1_EndPage extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/antilogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+
+
+
+    content.ChangeToState('Room3-1-End');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
   }
 }
 
 
 
 
+class Room4Page extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/antilogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
 
-// class Room1Page extends PNGRoom {
-// 	preload(){
-// 		this.img = [];
-// 		this.img[0] = loadImage('assets/map1.png');
-// 		this.img[1] = loadImage('assets/npc7.png');
-
-// 		this.NPC= createSprite(590, 145, NPCW, NPCH);
-// 		this.NPC.addImage(this.img[1]);
-
-//     this.key = [];
-// 		this.key[0] = createSprite(338, 617);
-// 		this.key[0].addImage(logo[0]);
-
-//     this.key[1] = createSprite(296, 214);
-//     this.key[1].addImage(logo[1]);
-
-//     this.key[2] = createSprite(514, 600);
-//     this.key[2].addImage(logo[2]);
-
-//     this.key[3] = createSprite(68, 273);
-//     this.key[3].addImage(logo[3]);
-
-//     ina = 0;
-//     groupIndex = 0;
-// 	}
-// 	draw(){
-// 		super.draw();
-// 		drawSprite(this.NPC);
-// 		drawSprite(this.key[0]);
-//     drawSprite(this.key[1]);
-//     drawSprite(this.key[2]);
-//     drawSprite(this.key[3]);
-
-// 		playerSprite.overlap(this.NPC, this.talkable);
-// 		playerSprite.overlap(this.key[0], this.collect0);
-//     playerSprite.overlap(this.key[1], this.collect1);
-//     playerSprite.overlap(this.key[2], this.collect2);
-//     playerSprite.overlap(this.key[3], this.collect3);
-
-// 		image(this.img[0], 1130, 0, 150, 150);
-
-//     if (file[0] == true) this.key[0].remove();
-//     if (file[1] == true) this.key[1].remove();
-//     if (file[2] == true) this.key[2].remove();
-//     if (file[3] == true) this.key[3].remove();
-
-//     if (ina == 6) this.NPC.remove();
-// 	}
-// 	talkable() {
-// 		content.ChangeToState('Room1');
-// 		let conversation = content.GroupContent(groupIndex);
-// 		if (ina < conversation.length) {
-// 			clickables[1].visible = true;
-// 			drawtextbox(conversation[ina]);
-// 			clickables[1].onPress = function temp() { 
-//         		ina++;
-//       		} 
-// 		}
-//     if (ina == 6) {
-//       ImageIndex = 1;
-//     }
-// 	}
-// 	collect0() {
-//     	file[0] = true;
-//   	}
-//   collect1() {
-//       file[1] = true;
-//     }
-//   collect2() {
-//       file[2] = true;
-//     }
-//   collect3() {
-//       file[3] = true;
-//     }
-// }
-
-// class Room2Page extends PNGRoom {
-// 	preload(){
-// 		this.img = [];
-// 		this.img[0] = loadImage('assets/map2.png');
-// 		this.img[1] = loadImage('assets/npc2.png');
-// 		this.NPC= createSprite(550, 302, NPCW, NPCH);
-// 		this.NPC.addImage(this.img[1]);
-
-// 		ina = 0;
-// 		groupIndex = 0;
-// 	}
-// 	draw(){
-// 		super.draw();
-// 		drawSprite(this.NPC);
-// 		playerSprite.overlap(this.NPC, this.talkable);
-// 		image(this.img[0], 1130, 0, 150, 150);
-// 		if (ina == 12) this.NPC.remove();
-// 	}
-// 	talkable() {
-// 		content.ChangeToState('Room2');
-// 		let conversation = content.GroupContent(groupIndex);
-//     if (ina == 12) {
-//       ImageIndex = 2;
-//     }
-// 		if (ina < conversation.length) {
-// 			clickables[1].visible = true;
-// 			drawtextbox(conversation[ina]);
-// 			clickables[1].onPress = function temp() { 
-//         		ina++;
-//       		} 
-// 		}
-// 		else{
-// 			clickables[2].visible = true;
-// 			clickables[2].onPress = function temp(){
-// 			}
-// 			if (file[0] && file[1] && file[2] && file[3]){
-//         clickables[2].visible = false;
-// 				clickables[3].visible = true;
-// 				clickables[3].onPress = function temp(){
-// 					groupIndex = 1;
-// 					ina = 0;
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
-// class Room3Page extends PNGRoom {
-// 	preload(){
-// 		this.img = [];
-// 		this.img[0] = loadImage('assets/map3.png');
-// 		this.img[1] = loadImage('assets/npc5.png');
-// 		this.NPC= createSprite(252, 348, NPCW, NPCH);
-// 		this.NPC.addImage(this.img[1]);
-
-//     ina = 0;
-//     groupIndex = 0;
-// 	}
-// 	draw(){
-// 		super.draw();
-// 		drawSprite(this.NPC);
-//     playerSprite.overlap(this.NPC, this.talkable);
-// 		image(this.img[0], 1130, 0, 150, 150);
-
-//     if (ina == 11) this.NPC.remove();
-// 	}
-//   talkable(){
-//     content.ChangeToState('Room3');
-//     let conversation = content.GroupContent(groupIndex);
-//     if (ina == 11) {
-//       ImageIndex = 3;
-//     }
-//     if (ina < conversation.length) {
-//       clickables[1].visible = true;
-//       drawtextbox(conversation[ina]);
-//       clickables[1].onPress = function temp() { 
-//             ina++;
-//           } 
-//     }
-//     else{
-//       clickables[2].visible = true;
-//       clickables[2].onPress = function temp(){
-//       }
-//       if (file[0] && file[1] && file[2] && file[3]){
-//         clickables[2].visible = false;
-//         clickables[3].visible = true;
-//         clickables[3].onPress = function temp(){
-//           groupIndex = 1;
-//           ina = 0;
-//         }
-//       }
-//     }
-//   }
-// }
-
-// class Room4Page extends PNGRoom {
-// 	preload(){
-// 		this.img = [];
-// 		this.img[0] = loadImage('assets/map4.png');
-// 		this.img[1] = loadImage('assets/npc1.png');
-// 		this.img[2] = loadImage('assets/npc3.png');
-
-// 		this.NPC = [];
-// 		this.NPC[0] = createSprite(58, 280, NPCW, NPCH);
-// 		this.NPC[1] = createSprite(950, 506, NPCW, NPCH);
-// 		this.NPC[0].addImage(this.img[1]);// Men
-// 		this.NPC[1].addImage(this.img[2]);// Women
-
-//     inaMen = 0;
-//     inaWomen = 0;
-
-//     groupIndexMen = 0;
-//     groupIndexWomen = 0;
-// 	}
-// 	draw(){
-// 		super.draw();
-// 		drawSprite(this.NPC[0]);
-// 		drawSprite(this.NPC[1]);
-//     playerSprite.overlap(this.NPC[0], this.talkableMen);
-//     playerSprite.overlap(this.NPC[1], this.talkableWomen);
-// 		image(this.img[0], 1130, 0, 150, 150);
-//     if (inaMen == 10) this.NPC[0].remove();
-//     if (inaWomen == 10) this.NPC[1].remove();
-// 	}
-//   talkableMen() {
-//     content.ChangeToState('Room4_M');
-//     let conversation = content.GroupContent(groupIndexMen);
-//     if (inaMen == 10) {
-//       ImageIndex = 4;
-//     }
-//     if (inaMen < conversation.length) {
-//       clickables[1].visible = true;
-//       drawtextbox(conversation[inaMen]);
-//       clickables[1].onPress = function temp() { 
-//             inaMen++;
-//           } 
-//     }
-//     else{
-//       clickables[2].visible = true;
-//       clickables[2].onPress = function temp(){
-//       }
-//       if (file[0] && file[1] && file[2] && file[3]){
-//         clickables[2].visible = false;
-//         clickables[3].visible = true;
-//         clickables[3].onPress = function temp(){
-//           inaMen = 0;
-//           groupIndexMen = 1;
-//         }
-//       }
-//     }
-//   }
-//   talkableWomen() {
-//     content.ChangeToState('Room4_W');
-//     let conversation = content.GroupContent(groupIndexWomen);
-//     if (inaWomen == 10) {
-//       ImageIndex = 5;
-//     }
-//     if (inaWomen < conversation.length) {
-//       clickables[1].visible = true;
-//       drawtextbox(conversation[inaWomen]);
-//       clickables[1].onPress = function temp() { 
-//             inaWomen++;
-//           } 
-//     }
-//     else{
-//       clickables[2].visible = true;
-//       clickables[2].onPress = function temp(){
-//       }
-//       if (file[0] && file[1] && file[2] && file[3]){
-//         clickables[2].visible = false;
-//         clickables[3].visible = true;
-//         clickables[3].onPress = function temp(){
-//           inaWomen = 0;
-//           groupIndexWomen = 1;
-//         }
-//       }
-//     }
-//   }
-// }
-
-// class Room5Page extends PNGRoom {
-// 	preload(){
-// 		this.img = [];
-// 		this.img[0] = loadImage('assets/map5.png');
-// 		this.img[1] = loadImage('assets/npc6.png');
-// 		this.NPC = createSprite(950, 42, NPCW, NPCH);
-// 		this.NPC.addImage(this.img[1]);
-
-//     ina = 0;
-//     groupIndex = 0;
-// 	}
-// 	draw(){
-// 		super.draw();
-// 		drawSprite(this.NPC);
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
     
-// 		image(this.img[0], 1130, 0, 150, 150);
-//     playerSprite.overlap(this.NPC, this.talkable);
-//     if (ina == 10) this.NPC.remove();
-// 	}
-//   talkable() {
-//     content.ChangeToState('Room5');
-//     let conversation = content.GroupContent(groupIndex);
-//     if (ina == 10) {
-//       ImageIndex = 6;
-//     }
-//     if (ina < conversation.length) {
-//       clickables[1].visible = true;
-//       drawtextbox(conversation[ina]);
-//       clickables[1].onPress = function temp() { 
-//             ina++;
-//           } 
-//     }
-//     else{
-//       clickables[2].visible = true;
-//       clickables[2].onPress = function temp(){
-//       }
-//       if (file[0] && file[1] && file[2] && file[3]){
-//         clickables[2].visible = false;
-//         clickables[3].visible = true;
-//         clickables[3].onPress = function temp(){
-//           groupIndex = 1;
-//           ina = 0;
-//         }
-//       }
-//     }
-//   }
-// }
+    clickables[6].visible = true;
+    clickables[7].visible = true;
 
-// class Room6Page extends PNGRoom {
-// 	preload(){
-// 		this.img = [];
-// 		this.img[0] = loadImage('assets/map6.png');
-// 		this.img[1] = loadImage('assets/npc4.png');
+    clickables[6].onPress = function temp(){
+      adventureManager.changeState("Final-End");
+    }
+    clickables[7].onPress = function temp(){
+      adventureManager.changeState("Room4-1");
+    }
 
-// 		this.NPC = createSprite(32, 570, NPCW, NPCH);
-// 		this.NPC.addImage(this.img[1], ); 
 
-//     ina = 0;
-//     groupIndex = 0;
-// 	}
-// 	draw(){
-// 		super.draw();
-// 		drawSprite(this.NPC);
-// 		image(this.img[0], 1130, 0, 150, 150);
-//     playerSprite.overlap(this.NPC, this.talkable);
-//     if (ina == 10) this.NPC.remove();
-// 	}
-//   talkable() {
-//     content.ChangeToState('Room6');
-//     let conversation = content.GroupContent(groupIndex);
-//     if (ina == 10) {
-//       ImageIndex = 7;
-//     }
-//     if (ina < conversation.length) {
-//       clickables[1].visible = true;
-//       drawtextbox(conversation[ina]);
-//       clickables[1].onPress = function temp() { 
-//             ina++;
-//           } 
-//     }
-//     else{
-//       clickables[2].visible = true;
-//       clickables[2].onPress = function temp(){
-//       }
-//       if (file[0] && file[1] && file[2] && file[3]){
-//         clickables[2].visible = false;
-//         clickables[3].visible = true;
-//         clickables[3].onPress = function temp(){
-//           groupIndex = 1;
-//           ina = 0;
-//         }
-//       }
-//     }
-//   }
-// }
+    content.ChangeToState('Room4');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
 
-// class Room7Page extends PNGRoom {
-// 	preload(){
-// 		this.img = [];
-// 		this.img[0] = loadImage('assets/map7.png');
+  }
+}
 
-// 		this.NPC = createSprite(980, height/3, 300, 300);
-// 		this.NPC.addAnimation('regular', NPC[1]); 
 
-//     ina = 0;
-//     groupIndex = 0;  
-// 	}
-// 	draw(){
-// 		super.draw();
-// 		drawSprite(this.NPC);
-// 		image(this.img[0], 1130, 0, 150, 150);
-//     playerSprite.overlap(this.NPC, this.talkable);
-// 	}
-//   talkable() {
-//     content.ChangeToState('Room7');
 
-//     if (ImageIndex !== 7){
-//       let conversation = content.GroupContent(0);
-//       clickables[1].visible = true;
-//       drawtextbox(conversation[0]);
-//       clickables[1].onPress = function temp() {
-//         file[0] = false;
-//         file[1] = false;
-//         file[2] = false;
-//         file[3] = false;
-//         adventureManager.changeState("BadEnding");
-//       }
-//     }
-//     else{
-//       let conversation = content.GroupContent(1);
-//       clickables[1].visible = true;
-//       drawtextbox(conversation[0]);
-//       clickables[1].onPress = function temp() {
-//         file[0] = false;
-//         file[1] = false;
-//         file[2] = false;
-//         file[3] = false;
-//         adventureManager.changeState("GoodEnding");
-//       }
-//     }
-//   }
-// }
-// // I learn this class function from Jiaquan
-// class Content_Man {
-//   //Use csv file location as parameter.
-//   constructor(filename) {
-//     this.file = loadTable(filename,'csv','header');
-//     this.state = [];
-//     this.group = [];
-//   } 
-//   //set up the Content, with State name.
-//   setup() {
-//     let statetotal = 0;
-//     for (let i = 0; i < this.file.getRowCount(); i++) {
-//       let statename = this.file.getString(i, 'State');
+class Room4_1Page extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/antilogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
 
-//       if (statename == '') return 'Not Valid State Name';
-//       else if (this.state.indexOf(statename) == -1) {
-//         this.state[statetotal] = statename;
-//         statetotal++;
-//       }
-//     }
-//   }
-//   //This will change to the state with the parameter "stateName", find the correct State in csv
-//   ChangeToState(stateName) {
-//     if (this.state.indexOf(stateName) == -1) return 'Not Valid State Name';
-//     else this.group = this.file.findRows(stateName,'State');
-//     return this.group;
-//   }
-//   //This will change to correct group with the parameter "groupID", find the correct Group in csv, return as array of content.
-//   GroupContent(groupID) {
-//     let content = [];
-//     for (let i = 0; i < this.group.length; i++) {
-//       if (this.group[i].getNum('Group') == groupID) {
-//         content[this.group[i].getNum('Index')] = this.group[i].getString('Content');
-//       }
-//     }
-//     return content;
-//   }
-//   //Not useful
-//   getAllStateName() {
-//     return this.state;
-//   }
-//   //Not useful
-//   getS() {
-//     return this.group;
-//   }
-// }
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+    
+    clickables[8].visible = true;
+
+
+    clickables[8].onPress = function temp(){
+      adventureManager.changeState("Room4-1-End");
+    }
+
+
+    content.ChangeToState('Room4-1');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+
+  }
+}
+
+
+
+
+class Room4_1_EndPage extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/antilogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+
+
+
+    content.ChangeToState('Room4-1-End');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+  }
+}
+
+
+class Final_EndPage extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/Riot.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/antilogo.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 260, dataWeight, dataHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+
+
+
+    content.ChangeToState('Final-End');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+  }
+}
+
+
+
+// I learn this class function from Jiaquan
+class Content_Man {
+  //Use csv file location as parameter.
+  constructor(filename) {
+    this.file = loadTable(filename,'csv','header');
+    this.state = [];
+    this.group = [];
+  } 
+  //set up the Content, with State name.
+  setup() {
+    let statetotal = 0;
+    for (let i = 0; i < this.file.getRowCount(); i++) {
+      let statename = this.file.getString(i, 'State');
+
+      if (statename == '') return 'Not Valid State Name';
+      else if (this.state.indexOf(statename) == -1) {
+        this.state[statetotal] = statename;
+        statetotal++;
+      }
+    }
+  }
+  //This will change to the state with the parameter "stateName", find the correct State in csv
+  ChangeToState(stateName) {
+    if (this.state.indexOf(stateName) == -1) return 'Not Valid State Name';
+    else this.group = this.file.findRows(stateName,'State');
+    return this.group;
+  }
+  //This will change to correct group with the parameter "groupID", find the correct Group in csv, return as array of content.
+  GroupContent(groupID) {
+    let content = [];
+    for (let i = 0; i < this.group.length; i++) {
+      if (this.group[i].getNum('Group') == groupID) {
+        content[this.group[i].getNum('Index')] = this.group[i].getString('Content');
+      }
+    }
+    return content;
+  }
+  //Not useful
+  getAllStateName() {
+    return this.state;
+  }
+  //Not useful
+  getS() {
+    return this.group;
+  }
+}
