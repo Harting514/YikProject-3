@@ -1,10 +1,13 @@
 ID,Name,State,PNGFilename,Text,x,y,width,height
-0,Next,,,Next,100,650,100,50
-1,StartGame,,,StartGame,100,650,100,50
-2,Yes! Promote!,,,Yes! Promote!,100,650,100,50
-3,Keep Promote!,,,Keep Promote!,100,650,100,50
-4,Nope,,,Nope,1050,650,100,50
-5,STOP Promote,,,STOP Promote,1050,650,100,50
-6,"Ignore Doubts, KEEP Promote!",,,"Ignore Doubts, KEEP Promote!",100,650,100,50
-7,Listen to Doubts and Suspend Promotion,,,Listen to Doubts and Suspend Promotion,1050,650,100,50
-8,Form a data secyruty supervision team,,,Form a data secyruty supervision team,630,650,100,50
+0,Next,,assets/button1.png,Next,30,650,100,50
+1,StartGame,,assets/button1.png,StartGame,30,650,100,50
+2,Yes! Promote!,,assets/button1.png,Yes! Promote!,100,650,100,50
+3,Keep Promote!,,assets/button1.png,Keep Promote!,100,650,100,50
+4,Nope,,assets/button1.png,Nope,1050,650,100,50
+5,STOP Promote,,assets/button1.png,STOP Promote,1050,650,100,50
+6,"Ignore Doubts, KEEP Promote!",,assets/button1.png,"Ignore Doubts, 
+KEEP Promote!",100,650,100,50
+7,Listen to Doubts and Suspend Promotion,,assets/button2.png,"Listen to Doubts and 
+Suspend Promotion",1050,650,150,50
+8,Form a data secyruty supervision team,,assets/button2.png,"Form a data secyruty 
+supervision team",630,650,150,50

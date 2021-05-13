@@ -12,10 +12,10 @@
 
   <script src="p5.2DAdventure.js"></script>
 ***********************************************************************************/
-
 var images = [];
 
 var content;
+
 
 // variables for data and character
 var dataWeight = 140;
@@ -30,6 +30,8 @@ var groupIndex = 0;
 var gDebugMode = true;
 
 
+//setting a random var for "Post-credits scence" (option) Ending
+var r;
 
 
 // adventure manager global  
@@ -43,6 +45,10 @@ var NPCSprite;
 
 // Allocate Adventure Manager with states table and interaction tables
 function preload() {
+  images[0] = loadImage('assets/up.png');
+  images[1] = loadImage('assets/down.png');
+
+  
   clickablesManager = new ClickableManager('data/clickableLayout.csv');
   content = new Content_Man('data/Content.csv');
   adventureManager = new AdventureManager("data/adventureStates.csv", "data/interactionTable.csv");
@@ -65,6 +71,9 @@ function setup() {
 
   textSize(24);
   textAlign(LEFT);
+
+  r = int(random(2));
+
 }
 
 
@@ -81,7 +90,6 @@ function draw() {
   if( gDebugMode == true ) {
     drawDebugInfo();
   }
-
 }
 
 
@@ -93,7 +101,7 @@ function mouseReleased() {
 
 function drawDebugInfo() {
   fill(255,0,0);
-  text("X: " + mouseX + "   Y: " + mouseY, 20, height - 20);
+  text("R: " + r, 20, height - 20);
 }
 
 // keyTyped gets triggered whenever key is down
@@ -202,12 +210,12 @@ class DataScreen extends PNGRoom{
   }
 }
 
-class Room1Page extends PNGRoom{
+class Room1Page extends PNGRoom{ 
   preload() {
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
@@ -218,11 +226,11 @@ class Room1Page extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
 
     clickables[2].visible = true;
     clickables[4].visible = true;
@@ -247,10 +255,11 @@ class Room1EndPage extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/down.png');
     ina = 0;
     groupIndex = 0;
   }
@@ -258,11 +267,12 @@ class Room1EndPage extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[6], 180, 0, dataWeight-50, dataHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
     
 
     content.ChangeToState('Room1-End');
@@ -279,10 +289,12 @@ class Room2Page extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/down.png');
+    this.img[7] = loadImage('assets/up.png');
     ina = 0;
     groupIndex = 0;
   }
@@ -290,11 +302,13 @@ class Room2Page extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
+    image(this.img[7], 180, 0, dataWeight-50, dataHeight);
+    image(this.img[7], 180, 160, dataWeight-50, dataHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
 
     clickables[3].visible = true;
     clickables[5].visible = true;
@@ -305,7 +319,6 @@ class Room2Page extends PNGRoom{
     clickables[5].onPress = function temp(){
       adventureManager.changeState("Room2-End");
     }
-
 
     content.ChangeToState('Room2');
     let conversation = content.GroupContent(groupIndex);
@@ -321,10 +334,12 @@ class Room2EndPage extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/down.png');
+    this.img[7] = loadImage('assets/up.png');
     ina = 0;
     groupIndex = 0;
   }
@@ -332,12 +347,13 @@ class Room2EndPage extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
-    
+    image(this.img[6], 180, 0, dataWeight-50, dataHeight);
+    image(this.img[6], 180, 160, dataWeight-50, dataHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
 
     content.ChangeToState('Room2-End');
     let conversation = content.GroupContent(groupIndex);
@@ -353,11 +369,14 @@ class Room3Page extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
     this.img[6] = loadImage('assets/antilogo.png');
+    this.img[7] = loadImage('assets/down.png');
+    this.img[8] = loadImage('assets/up.png');
+
     ina = 0;
     groupIndex = 0;
   }
@@ -365,12 +384,15 @@ class Room3Page extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
     image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+    image(this.img[8], 180, 0, dataWeight-50, dataHeight);
+    image(this.img[8], 180, 160, dataWeight-50, dataHeight);
+    image(this.img[8], 180, 320, dataWeight-50, dataHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
     
     clickables[6].visible = true;
     clickables[7].visible = true;
@@ -396,11 +418,14 @@ class Room3_1Page extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
     this.img[6] = loadImage('assets/antilogo.png');
+    this.img[7] = loadImage('assets/down.png');
+    this.img[8] = loadImage('assets/up.png');
+
     ina = 0;
     groupIndex = 0;
   }
@@ -408,12 +433,15 @@ class Room3_1Page extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
     image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
+
+    image(this.img[7], 180, 0, dataWeight-50, dataHeight);
+    image(this.img[7], 180, 160, dataWeight-50, dataHeight);
     
     clickables[8].visible = true;
 
@@ -437,11 +465,13 @@ class Room3_1_EndPage extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
     this.img[6] = loadImage('assets/antilogo.png');
+    this.img[7] = loadImage('assets/down.png');
+    this.img[8] = loadImage('assets/up.png');
     ina = 0;
     groupIndex = 0;
   }
@@ -449,14 +479,15 @@ class Room3_1_EndPage extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
     image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
-
-
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
+    image(this.img[7], 180, 0, dataWeight-50, dataHeight);
+    image(this.img[7], 180, 160, dataWeight-50, dataHeight);
+    image(this.img[7], 180, 320, dataWeight-50, dataHeight);
 
     content.ChangeToState('Room3-1-End');
     let conversation = content.GroupContent(groupIndex);
@@ -472,11 +503,13 @@ class Room4Page extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
     this.img[6] = loadImage('assets/antilogo.png');
+    this.img[7] = loadImage('assets/down.png');
+    this.img[8] = loadImage('assets/up.png');
     ina = 0;
     groupIndex = 0;
   }
@@ -484,19 +517,25 @@ class Room4Page extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
     image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
+    image(this.img[8], 180, 160, dataWeight-50, dataHeight);
+    image(this.img[8], 180, 320, dataWeight-50, dataHeight);
     
     clickables[6].visible = true;
     clickables[7].visible = true;
 
     clickables[6].onPress = function temp(){
-      adventureManager.changeState("Final-End");
+      if (r == 1){
+        adventureManager.changeState("Final-End");
+      }
+      else adventureManager.changeState("Option-End");
     }
+
     clickables[7].onPress = function temp(){
       adventureManager.changeState("Room4-1");
     }
@@ -516,11 +555,13 @@ class Room4_1Page extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
     this.img[6] = loadImage('assets/antilogo.png');
+    this.img[7] = loadImage('assets/down.png');
+    this.img[8] = loadImage('assets/up.png');
     ina = 0;
     groupIndex = 0;
   }
@@ -528,13 +569,15 @@ class Room4_1Page extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
     image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
-    
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
+    image(this.img[7], 180, 160, dataWeight-50, dataHeight);
+
+
     clickables[8].visible = true;
 
 
@@ -558,11 +601,13 @@ class Room4_1_EndPage extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
     this.img[6] = loadImage('assets/antilogo.png');
+    this.img[7] = loadImage('assets/down.png');
+    this.img[8] = loadImage('assets/up.png');
     ina = 0;
     groupIndex = 0;
   }
@@ -570,12 +615,15 @@ class Room4_1_EndPage extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
     image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
+    image(this.img[7], 180, 0, dataWeight-50, dataHeight);
+    image(this.img[8], 180, 160, dataWeight-50, dataHeight);
+    image(this.img[8], 180, 320, dataWeight-50, dataHeight);
 
 
 
@@ -591,11 +639,13 @@ class Final_EndPage extends PNGRoom{
     this.img = [];
     this.img[0] = loadImage('assets/companylogo.png');
     this.img[1] = loadImage('assets/economylogo.png');
-    this.img[2] = loadImage('assets/Riot.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
     this.img[3] = loadImage('assets/governlogo.png');
     this.img[4] = loadImage('assets/Userlogo.png');
     this.img[5] = loadImage('assets/Datalogo.png');
     this.img[6] = loadImage('assets/antilogo.png');
+    this.img[7] = loadImage('assets/down.png');
+    this.img[8] = loadImage('assets/up.png');
     ina = 0;
     groupIndex = 0;
   }
@@ -603,12 +653,15 @@ class Final_EndPage extends PNGRoom{
   draw() {
     super.draw();
     image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
-    image(this.img[1], 0, 0, dataWeight, dataHeight);
-    image(this.img[2], 0, 260, dataWeight, dataHeight);
     image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
     image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
-    image(this.img[5], 0, 125, dataWeight, dataHeight);
     image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
+    image(this.img[7], 180, 0, dataWeight-50, dataHeight);
+    image(this.img[8], 180, 160, dataWeight-50, dataHeight);
+    image(this.img[8], 180, 320, dataWeight-50, dataHeight);
 
 
 
@@ -617,6 +670,49 @@ class Final_EndPage extends PNGRoom{
     drawtextbox(conversation[ina]);
   }
 }
+
+
+class Option_EndPage extends PNGRoom{
+  preload() {
+    this.img = [];
+    this.img[0] = loadImage('assets/companylogo.png');
+    this.img[1] = loadImage('assets/economylogo.png');
+    this.img[2] = loadImage('assets/NeoLuddism.png');
+    this.img[3] = loadImage('assets/governlogo.png');
+    this.img[4] = loadImage('assets/Userlogo.png');
+    this.img[5] = loadImage('assets/Datalogo.png');
+    this.img[6] = loadImage('assets/antilogo.png');
+    this.img[7] = loadImage('assets/down.png');
+    this.img[8] = loadImage('assets/up.png');
+    ina = 0;
+    groupIndex = 0;
+  }
+
+  draw() {
+    super.draw();
+    image(this.img[0], 455, 70, CharacterWeight, CharacterHeight);
+    image(this.img[3], 455, 235, CharacterWeight, CharacterHeight);
+    image(this.img[4], 890, 70, CharacterWeight, CharacterHeight);
+    image(this.img[6], 890, 235, CharacterWeight, CharacterHeight);
+    image(this.img[1], 0, 0, dataWeight, dataHeight);
+    image(this.img[2], 0, 320, dataWeight, dataHeight);
+    image(this.img[5], 0, 160, dataWeight, dataHeight);
+    image(this.img[7], 180, 0, dataWeight-50, dataHeight);
+    image(this.img[8], 180, 160, dataWeight-50, dataHeight);
+    image(this.img[8], 180, 320, dataWeight-50, dataHeight);
+
+
+
+
+    content.ChangeToState('Option-End');
+    let conversation = content.GroupContent(groupIndex);
+    drawtextbox(conversation[ina]);
+  }
+}
+
+
+
+
 
 
 
